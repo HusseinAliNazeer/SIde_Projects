@@ -1,0 +1,116 @@
+2- Which of the following methods would be legal if added (individually) at line 4 in the following code ? (Choose all that
+apply.)
+1. public class Test1 {
+2. public float aMethod(float a, float b) { return 0;
+3.}
+4.
+5.}
+A. public int aMethod(int a, int b) { return 0;}
+B. public float aMethod(float c, float d) { return 0; }
+C. public int aMethod(float c, float d) { return 0; }
+D. private float aMethod(int a, int b, int c) { return 0;}
+/*Answer IS (D)*/
+4- Given
+class A {
+protected int method1(int a, int b) { return 0; }}
+Which is valid in a class that extends class A?
+A. public int method1(int a, int b) { return 0; }
+B. private int method1(int a, int b) { return 0; }
+C. public short method1(int a, int b) { return 0; }
+D. static protected int method1(int a, int b) { return 0; }
+/*Answer is (A)*/
+5-method public boolean equals(0bject object) defined in class java.lang.Object offers only a shallow comparison between
+objects, create your own code to test it,
+class A {
+    int s ;
+    A(int t)
+    {
+        s=t;
+    }
+
+    public boolean equals(A object)
+    {
+        return this==object;
+    }
+
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+    A a1=new A(5);
+    A a2=new A(2);
+    A a3=a1;
+    if(a1.equals(a2))
+        System.out.println("a1 equal a2");
+    else if(a1.equals(a3))
+        System.out.println("a1 equal a3");
+
+
+    }
+}
+/*Output : a1 equal a3*/
+then create class Circle that overrides the equal method so that 2 circles will be equal if
+they have the same radius.
+class Circle {
+    int radius ;
+    Circle(int radius)
+    {
+        this.radius=radius;
+    }
+
+    public boolean equals(Circle object)
+    {
+        return this.radius==object.radius;
+    }
+
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+        Circle c1=new Circle(4);
+        Circle c2=new Circle(4);
+        System.out.println(c1.equals(c2));
+    }
+}
+//Output : true
+6-method public String toString() in class java.lang.Object returns the Hash code for the object, override this method in class
+Circle to return the radius of circle.
+
+
+class Circle {
+    int radius ;
+    Circle(int radius)
+    {
+        this.radius=radius;
+    }
+
+    public boolean equals(Circle object)
+    {
+        return this.radius==object.radius;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(this.radius);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3 @@
+#cropinga=imread('gery.png');x1=200;x2=400;y1=50;y2=150;for i = x1:x2  for j = y1:y2  b((i-x1)+1,(j-y1)+1)=a(i,j);
+  endfor
+endforimshow(b),figure,imshow(a);#rotate 90a=imread('grey.png');b=zeros(200,200,'uint8');for i = 1:size(a,1)  for j = 1:size(a,2)  b(size(a,2)-j+1,i)=a(i,j);  endforendforimshow(b),figure,imshow(a);#negativea=imread('rnn.png');for i = 1:size(a,1)  for j = 1:size(a,2)  b(i,j,1)=255-a(i,j,1);  b(i,j,2)=255-a(i,j,2);  b(i,j,3)=255-a(i,j,3);  endforendforimshow(b),figure,imshow(a);imwrite(b,'rnn_.png');

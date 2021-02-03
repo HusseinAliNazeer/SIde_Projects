@@ -1,0 +1,213 @@
+2- Suppose that statement2 causes an exception in the following try-catch block:
+try {
+statement1;
+statement2;
+statement3;
+}
+catch (Exception1 ex1) {
+}
+catch (Exception2 ex2) {
+}
+statement4;
+Answer the following questions:
+Will statement3 be executed? (No)
+If the exception is not caught, will statement4 be executed? (No)
+If the exception is caught in the catch block, will statement4 be executed? (yes)
+
+3- What is a checked exception, and what is an unchecked exception?
+Checked: are the exceptions that are checked at compile time. If some code within a method throws a checked exception, then the method must either handle the exception or it must specify the exception using throws keyword
+Unchecked are the exceptions that are not checked at compiled time the runtime exceptions.
+
+4- What is displayed when the following program is run?
+public class Test {
+public static void main(String[] args) {
+try {
+int [] list = new int [10];
+System.out.println("list[10] is " + list[10]);
+}
+catch (ArithmeticException ex) {
+System.out.println("ArithmeticException");
+}
+catch (RuntimeException ex) {
+System.out.println("RuntimeException");
+}
+catch (Exception ex) {
+System.out.println("Exception");
+}
+}
+}
+//Runtime Exception
+
+5‐ Write down the code for the parseHex(String hexString)
+method, which converts a hex string into
+a decimal number. Implement the parseHex method to throw a java.lang.NumberFormatException if
+the string is not a hex string.
+public class Main {
+    public static int getDecimal(String hex) throws Exception {
+        boolean isHex = hex.matches("^[0-9a-fA-F]+$");
+        try{
+        String digits = "0123456789ABCDEF";
+        hex = hex.toUpperCase();
+        int val = 0;
+        for (int i = 0; i < hex.length(); i++)
+        {
+            char c = hex.charAt(i);
+            int d = digits.indexOf(c);
+            val = 16*val + d;
+        }
+        return val;
+	}
+	catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) throws Exception{
+	// write your code here
+        System.out.println(getDecimal("DEF5"));
+        System.out.println(getDecimal("yse"));
+
+    }
+}
+/*Output :
+57077
+Exception in thread "main" java.lang.Exception: java.lang.NumberFormatException
+	at Main.getDecimal(Main.java:9)
+	at Main.main(Main.java:26)
+*/
+
+6- Write down a class with a static method parseBinary that accepts a binary number as a string and returns a
+decimal integer representing its decimal value. Implement the parseBinary method to throw a
+BinaryNumberFormatException if the string is not a binary string.
+
+public class Main {
+    public static int parseBin(String bin) throws Exception {
+        try {
+            int decimal = Integer.parseInt(bin, 2);
+            return decimal;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) throws Exception{
+	// write your code here
+    System.out.println(parseBin("01001"));
+    System.out.println(parseBin("013"));
+    }
+}
+
+//Output:9
+//java.lang.NumberFormatException: For input string: "013"
+//0
+------------TEXT IO-----------------
+1-Write a simple program that reads the student marks stored as integers in a file (records.txt) and
+then prints the average mark to console
+
+ public static void main(String[] args) throws Exception{
+        int avg=0;
+        int n=0;
+        Scanner input = new Scanner(new File("/home/drvirus/Documents/students.txt"));
+        while(input.hasNext()){
+            avg+=Integer.parseInt(input.next());
+            n++;
+        }
+        System.out.println(avg/n);
+
+2-Given the following files:-
+Words.java
+import java.io.File;
+import java.util.Scanner;
+public class Words {
+public static void main(String[] args) {
+        int wordCount = 0;
+        // your code goes here ...
+        Scanner input = new Scanner(new File("/home/drvirus/Documents/text1.txt"));
+        while(input.hasNext()){
+            wordCount++;
+        }
+        System.out.println("Total words = " + wordCount);
+}}
+
+The program is supposed to read the input file and count how many words it contains.
+
+
+3-Write a method mostCommonNames that accepts a Scanner for an input file with names on each line separated
+by spaces. Some names appear multiple times in a row. For example:
+Benson Eric Eric Marty Kim Kim Kim Jenny Nancy Nancy Nancy Paul Paul
+Stuart Stuart Stuart Ethan Alyssa Alyssa Helene Jessica Jessica Jessica Jessica
+Jared Alisa Yuki Catriona Cody Coral Trent Kevin Ben Stefanie Kenneth
+For each line, print the most commonly occurring name. If there's a tie, use the first name that had that many
+occurrences.
+Most common: Kim
+Most common: Jessica
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+
+    static String mostCommon(String line)
+    {
+        String []  arr = line.split(" ");
+        // Create HashMap to store word and it's frequency
+        HashMap<String, Integer> hs = new HashMap<String, Integer>();
+
+        // Iterate through array of words
+        for (int i = 0; i < arr.length; i++) {
+            // If word already exist in HashMap then increase it's count by 1
+            if (hs.containsKey(arr[i])) {
+                hs.put(arr[i], hs.get(arr[i]) + 1);
+            }
+            // Otherwise add word to HashMap
+            else {
+                hs.put(arr[i], 1);
+            }
+        }
+
+        // Create set to iterate over HashMap
+        Set<Map.Entry<String, Integer> > set = hs.entrySet();
+        String key = "";
+        int value = 0;
+
+        for (Map.Entry<String, Integer> me : set) {
+            // Check for word having highest frequency
+            if (me.getValue() > value) {
+                value = me.getValue();
+                key = me.getKey();
+            }
+        }
+
+        // Return word having highest frequency
+        return key;
+    }
+
+    public static void main(String[] args) throws Exception{
+
+        Scanner input = new Scanner(new File("/home/drvirus/Documents/names.txt"));
+        while (input.hasNext())
+        {
+            System.out.println(mostCommon(input.nextLine()));
+        }
+
+    }
+}
+/*
+Nancy
+Jessica
+Yuki
+*/
+
+
+
+
+
+
+
+
